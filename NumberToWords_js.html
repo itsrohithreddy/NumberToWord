@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>number to word</title>
+    <style>
+        input[type="number"],
+        input[type="text"]{
+            font-weight: bolder;
+            font-size: 15px;
+            width:50%;
+            padding:10px;
+            border:2px solid rgba(45, 4, 134, 0.909);
+            border-radius:4px;
+            margin:10px;
+
+        }
+        button{
+            font-weight: bolder;
+            background-color:crimson;
+            color: chartreuse;
+            border: 3px solid rgba(45, 4, 134, 0.909);
+            padding:10px;
+            margin:10px;
+
+        }
+        button:hover{
+            color:black;
+        }
+
+    </style>
+</head>
+<body>
+    <input id="number" type="number" > 
+    <br>
+    <br><br>
+    
+    <button type="button" onclick="print_word()">CLICK ME </button>
+    <br><br>
+    <br>
+    <input type="text" id="word">
+    <script>
+        function print_word(){
+            var num1=document.getElementById("number");
+            var num=num1.value;
+            var ones=["","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+            var tens=["","","twenty","thirty","fourty","fifty","sixty","seventy","eighty","ninety"];
+            var str2,k1,k2,k3;
+            if(num<0 || num>999){
+                str2="out of range";
+            }
+            else if(num==0){
+                str2="Zero";
+            }
+            else if(num<20){
+                str2=ones[num];
+            }
+            else if(num>=20 && num<100){
+                k1=num%10;
+                k2=(Math.floor(num/10))%10;
+                str2=tens[k2]+" "+ones[k1];
+            }
+            else if(num>=100){
+                k1=num%10;
+                k2=(Math.floor(num/10))%10;
+                k3=(Math.floor(Math.floor(num/10)/10))%10;
+                if(k1==0 && k2==0)
+                {
+                    str2=ones[k3]+" Hundred";
+                }
+                else if(k2==1){
+                    str2=ones[k3]+" Hundred and "+ones[k1+10];
+                }
+                else
+                {
+                    str2=ones[k3]+" Hundred and " +tens[k2]+" "+ones[k1];
+                }
+            }
+            document.getElementById("word").value=str2;
+        }
+    </script>
+
+</body>
+</html>
